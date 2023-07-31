@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AgregarEditarCursosComponent } from './components/agregar-editar-cursos/agregar-editar-cursos.component';
 import { ListadoCursosComponent } from './components/listado-cursos/listado-cursos.component';
 import { VerCursosComponent } from './components/ver-cursos/ver-cursos.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { VerCursosComponent } from './components/ver-cursos/ver-cursos.component
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
