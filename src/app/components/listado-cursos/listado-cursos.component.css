@@ -17,3 +17,8 @@ table {
 th,td {
   width: 15%;
 }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
