@@ -9,14 +9,11 @@ import { ListadoCursosComponent } from './components/listado-cursos/listado-curs
 import { VerCursosComponent } from './components/ver-cursos/ver-cursos.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//Modulos
+import { SharedModule } from './shared/shared.module';
 
-// Angular Material
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSortModule} from '@angular/material/sort';
-import {MatInputModule} from '@angular/material/input';
+
+
 
 @NgModule({
   declarations: [
@@ -29,12 +26,8 @@ import {MatInputModule} from '@angular/material/input';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatSlideToggleModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule,
-    MatInputModule
+    SharedModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

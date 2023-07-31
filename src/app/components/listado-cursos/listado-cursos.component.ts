@@ -29,7 +29,7 @@ const listCursos: Curso[] = [
 })
 export class ListadoCursosComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['Name','Description','Teacher','Uri'];
+  displayedColumns: string[] = ['Name','Description','Teacher','Uri','Opciones'];
   dataSource = new MatTableDataSource<Curso>(listCursos);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
