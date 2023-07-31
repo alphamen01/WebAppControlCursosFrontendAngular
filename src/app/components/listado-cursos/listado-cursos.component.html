@@ -31,11 +31,11 @@
 
       <ng-container matColumnDef="Opciones">
         <th mat-header-cell *matHeaderCellDef>
-          <button class="agregar" mat-raised-button color="primary">Agregar</button>
+          <button class="agregar" routerLink="/AgregarCurso" mat-raised-button color="primary">Agregar</button>
         </th>
         <td mat-cell *matCellDef="let element"> 
-         <mat-icon matTooltip="Ver" class="search">search</mat-icon>
-         <mat-icon matTooltip="Editar" class="edit">edit</mat-icon>
+         <mat-icon matTooltip="Ver" class="search" [routerLink]="['/VerCurso',1]">search</mat-icon>
+         <mat-icon matTooltip="Editar" class="edit" routerLink="/EditarCurso/1">edit</mat-icon>
          <mat-icon matTooltip="Eliminar" class="delete">delete</mat-icon>
         </td>
       </ng-container>
