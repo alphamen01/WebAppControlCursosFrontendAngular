@@ -19,6 +19,9 @@ import {MatGridListModule} from '@angular/material/grid-list';
 //Componentes
 import { SpinnerComponent } from './spinner/spinner.component';
 
+//Modulos
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     SpinnerComponent
@@ -37,7 +40,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatCardModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule
   ],
 
   exports:[
@@ -54,7 +58,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
     MatSnackBarModule,
     SpinnerComponent,
     MatProgressBarModule,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

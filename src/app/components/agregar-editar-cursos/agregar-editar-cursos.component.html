@@ -7,32 +7,32 @@
         <mat-card-subtitle>
             Datos del curso
         </mat-card-subtitle>
-        <form>
+        <form [formGroup]="form" (ngSubmit)="agregarCurso()">
             <mat-grid-list cols="2" rowHeight="80px">
                 <mat-grid-tile [colspan]="2">
                     <mat-form-field appearance="outline">
                         <mat-label>Nombre</mat-label>
-                        <input matInput autocomplete="off">                        
+                        <input formControlName="Name" matInput autocomplete="off">                        
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2">
                     <mat-form-field appearance="outline">
                         <mat-label>Descripcion</mat-label>
-                        <textarea matInput autocomplete="off"></textarea>
+                        <textarea formControlName="Description" matInput autocomplete="off"></textarea>
                       </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2">
                     <mat-form-field appearance="outline">
                         <mat-label>Docente</mat-label>
-                        <input matInput autocomplete="off">                        
+                        <input formControlName="Teacher" matInput autocomplete="off">                        
                     </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="2"><mat-form-field appearance="outline">
                     <mat-label>Direccion</mat-label>
-                    <input matInput autocomplete="off">                        
+                    <input formControlName="Uri" matInput autocomplete="off">                        
                 </mat-form-field></mat-grid-tile>
                 <mat-grid-tile [colspan]="2">
-                    <button class="btn-guardar" mat-raised-button color="primary">Guardar</button>
+                    <button [disabled]="form.invalid" type="submit" class="btn-guardar" mat-raised-button color="primary">Guardar</button>
                     <button mat-raised-button routerLink="/Cursos">Volver</button>    
                 </mat-grid-tile>
               </mat-grid-list>
