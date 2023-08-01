@@ -1,14 +1,15 @@
 <div class="title">
     <h1>Ver curso</h1>
 </div>
-
-<div class="container">
+<app-spinner *ngIf="loading"></app-spinner>
+<!-- <div *ngIf="curso$ | async as curso" class="container"> PIPE ASYNC-->
+<div *ngIf="curso != null" class="container">
     <mat-card class="card">
-        <mat-card-title>C#</mat-card-title>
+        <mat-card-title>{{curso.name}}</mat-card-title>
         <mat-card-content>
-            <p><strong>Descripcion:</strong> Curso de programacion</p>
-            <p><strong>Docente:</strong> Luis Sanchez</p>
-            <p><strong>Direccion:</strong>	https://github.com/alphamen01?tab=repositories</p>
+            <p><strong>Descripcion:</strong> {{curso.description}}</p>
+            <p><strong>Docente:</strong> {{curso.teacher}}</p>
+            <p><strong>Direccion:</strong> {{curso.uri}}</p>
         </mat-card-content>
         <mat-card-actions>
             <button routerLink="/Cursos" mat-raised-button>Volver</button>

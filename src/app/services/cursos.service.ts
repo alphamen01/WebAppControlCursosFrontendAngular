@@ -19,4 +19,8 @@ export class CursosService {
    //this.http.get(this.myAppUrl + this.myApiUrl)
    return this.http.get<Curso[]>(`${this.myAppUrl}${this.myApiUrl}`)   
   }
+
+  getCurso(id: number): Observable<Curso>{
+    return this.http.get<Curso>(`${this.myAppUrl}${this.myApiUrl}${id}`)   
+  }
 }

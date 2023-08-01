@@ -10,8 +10,8 @@ const routes: Routes = [
   {path: '',redirectTo:'Cursos', pathMatch:'full'},
   {path: 'Cursos',component: ListadoCursosComponent},
   {path: 'AgregarCurso',component:  AgregarEditarCursosComponent},
-  {path: 'VerCurso/:Id',component:  VerCursosComponent},
-  {path: 'EditarCurso/:Id',component:  AgregarEditarCursosComponent},
+  {path: 'VerCurso/:id',component:  VerCursosComponent},
+  {path: 'EditarCurso/:id',component:  AgregarEditarCursosComponent},
   {path: '**',redirectTo:'Cursos', pathMatch:'full'},
 
 ];
