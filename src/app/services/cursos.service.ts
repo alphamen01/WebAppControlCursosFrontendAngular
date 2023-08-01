@@ -17,14 +17,18 @@ export class CursosService {
   }
   getCursos(): Observable<Curso[]>{
    //this.http.get(this.myAppUrl + this.myApiUrl)
-   return this.http.get<Curso[]>(`${this.myAppUrl}${this.myApiUrl}`)   
+   return this.http.get<Curso[]>(`${this.myAppUrl}${this.myApiUrl}`);   
   }
 
   getCurso(id: number): Observable<Curso>{
-    return this.http.get<Curso>(`${this.myAppUrl}${this.myApiUrl}${id}`)   
+    return this.http.get<Curso>(`${this.myAppUrl}${this.myApiUrl}${id}`) ;  
   }
 
   deleteCurso(id:number): Observable<void>{
-    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}${id}`)
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}${id}`);
+  }
+
+  addCurso(curso: Curso): Observable<Curso>{
+    return this.http.post<Curso>(`${this.myAppUrl}${this.myApiUrl}`, curso);
   }
 }

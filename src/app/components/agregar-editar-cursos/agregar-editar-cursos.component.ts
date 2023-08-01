@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Curso } from 'src/app/interfaces/curso';
+import { CursosService } from 'src/app/services/cursos.service';
 
 @Component({
   selector: 'app-agregar-editar-cursos',
@@ -12,7 +15,10 @@ export class AgregarEditarCursosComponent implements OnInit {
   loading: boolean = false;
   form: FormGroup
 
-  constructor( private fb: FormBuilder) { 
+  constructor( private fb: FormBuilder,
+                private _snackBar: MatSnackBar,
+                private _cursosService: CursosService,
+                private router: Router  ) { 
     this.form = this.fb.group({
       Name:['', Validators.required],
       Description:['', Validators.required],
@@ -36,7 +42,20 @@ export class AgregarEditarCursosComponent implements OnInit {
       teacher: this.form.value.Teacher,
       uri: this.form.value.Uri
     }
-    console.log(curso)
+    
+    //Enviamos objeto al backend
+    this._cursosService.addCurso(curso).subscribe(data => {
+      //console.log(data);
+      this.mensajeExito();
+      this.router.navigate(['/Cursos']);
+    })
+  }
+
+  mensajeExito(){
+    this._snackBar.open('El curso fue correctamente creado.', '',{
+      duration:3000,
+      horizontalPosition:'right',
+    });
   }
 
 }
