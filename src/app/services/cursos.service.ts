@@ -31,4 +31,8 @@ export class CursosService {
   addCurso(curso: Curso): Observable<Curso>{
     return this.http.post<Curso>(`${this.myAppUrl}${this.myApiUrl}`, curso);
   }
+
+  updateCurso(id:number, curso:Curso): Observable<void>{
+    return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}${id}`,curso); 
+  }
 }
