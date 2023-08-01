@@ -69,19 +69,22 @@ export class ListadoCursosComponent implements OnInit, AfterViewInit {
   }*/
 
 
-  eliminarCurso(){
+  eliminarCurso(id: number){
 
     this.loading = true;
 
-    setTimeout(()=>{
-      this.loading =false;
-      this._snackBar.open('El curso fue correctamente eliminado.', '',{
-        duration:3000,
-        horizontalPosition:'right'
-      });
-    }, 3000);
-
-    
+    this._cursosService.deleteCurso(id).subscribe(()=>{
+      this.mensajeExito();
+      this.loading = false;
+      this.obtenerCursos();
+    });
+       
+  }
+  mensajeExito(){
+    this._snackBar.open('El curso fue correctamente eliminado.', '',{
+      duration:3000,
+      horizontalPosition:'right',
+    });
   }
 
 }

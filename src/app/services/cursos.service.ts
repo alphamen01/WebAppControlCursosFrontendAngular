@@ -23,4 +23,8 @@ export class CursosService {
   getCurso(id: number): Observable<Curso>{
     return this.http.get<Curso>(`${this.myAppUrl}${this.myApiUrl}${id}`)   
   }
+
+  deleteCurso(id:number): Observable<void>{
+    return this.http.delete<void>(`${this.myAppUrl}${this.myApiUrl}${id}`)
+  }
 }
