@@ -3,25 +3,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { error } from 'console';
 import { TIMEOUT } from 'dns';
 import { Curso } from 'src/app/interfaces/curso';
+import { CursosService } from 'src/app/services/cursos.service';
 
-const listCursos: Curso[] = [
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'C#',Description:'Curso de programacion', Teacher:'Luis Sanchez', Uri:'https://github.com/alphamen01?tab=repositories'},
-  {Name:'Java',Description:'Curso de practico', Teacher:'Alexis Gutierrez', Uri:'https://github.com/guty'}
-];
+
 
 
 @Component({
@@ -31,22 +18,26 @@ const listCursos: Curso[] = [
 })
 export class ListadoCursosComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['Name','Description','Teacher','Uri','Opciones'];
-  dataSource = new MatTableDataSource<Curso>(listCursos);
+  displayedColumns: string[] = ['name','teacher','uri','opciones'];
+  dataSource = new MatTableDataSource<Curso>();
   loading: boolean = false;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private _snackBar: MatSnackBar, 
+              private _cursosService: CursosService) { }
 
   ngOnInit(): void {
+    this.obtenerCursos();
   }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
-    this.paginator._intl.itemsPerPageLabel = 'Items por pagina'
+    if(this.dataSource.data.length > 0){
+      this.paginator._intl.itemsPerPageLabel = 'Items por pagina'
+    }    
     this.dataSource.sort = this.sort;
   }
 
@@ -54,6 +45,29 @@ export class ListadoCursosComponent implements OnInit, AfterViewInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  obtenerCursos(){
+    this.loading = true;
+    this._cursosService.getCursos().subscribe(data =>{
+      this.loading = false;
+      this.dataSource.data = data;
+    }, error => {
+      this.loading = false;
+      alert("Oppss ocurrio un error")
+    })
+  }
+
+  /*obtenerCursos(){
+    this.loading = true;
+    this._cursosService.getCursos().subscribe({
+    next: (data) => {
+      this.loading = false;
+      this.dataSource.data = data;},
+    error: (e) => this.loading = false,
+    complete: () => console.info('complete') 
+    })
+  }*/
+
 
   eliminarCurso(){
 

@@ -31,10 +31,10 @@ export class AgregarEditarCursosComponent implements OnInit {
 
     //armamos el objeto curso
     const curso: Curso = {
-      Name: this.form.value.Name,
-      Description: this.form.value.Description,
-      Teacher: this.form.value.Teacher,
-      Uri: this.form.value.Uri
+      name: this.form.value.Name,
+      description: this.form.value.Description,
+      teacher: this.form.value.Teacher,
+      uri: this.form.value.Uri
     }
     console.log(curso)
   }

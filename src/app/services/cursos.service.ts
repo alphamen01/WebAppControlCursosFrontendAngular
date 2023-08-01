@@ -1,9 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { get } from 'http';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Curso } from '../interfaces/curso';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CursosService {
 
-  constructor() { }
+  private myAppUrl: string = environment.endpoint;
+  private myApiUrl: string = 'api/cursos/';
+
+  constructor(private http: HttpClient) {
+  }
+  getCursos(): Observable<Curso[]>{
+   //this.http.get(this.myAppUrl + this.myApiUrl)
+   return this.http.get<Curso[]>(`${this.myAppUrl}${this.myApiUrl}`)   
+  }
 }
