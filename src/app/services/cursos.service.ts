@@ -4,6 +4,7 @@ import { get } from 'http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Curso } from '../interfaces/curso';
+import { Material } from '../interfaces/material';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class CursosService {
 
   private myAppUrl: string = environment.endpoint;
   private myApiUrl: string = 'api/cursos/';
+  private myApi1Url: string = 'api/materiales/';
 
   constructor(private http: HttpClient) {
   }
@@ -34,5 +36,9 @@ export class CursosService {
 
   updateCurso(id:number, curso:Curso): Observable<void>{
     return this.http.put<void>(`${this.myAppUrl}${this.myApiUrl}${id}`,curso); 
+  }
+
+  getMateriales(id:number): Observable<Material[]>{
+   return this.http.get<Material[]>(`${this.myAppUrl}${this.myApi1Url}${id}`);   
   }
 }

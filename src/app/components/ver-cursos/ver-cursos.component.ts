@@ -1,7 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscriber, Subscription } from 'rxjs';
 import { Curso } from 'src/app/interfaces/curso';
+import { Material } from 'src/app/interfaces/material';
 import { CursosService } from 'src/app/services/cursos.service';
 
 @Component({
@@ -9,7 +13,7 @@ import { CursosService } from 'src/app/services/cursos.service';
   templateUrl: './ver-cursos.component.html',
   styleUrls: ['./ver-cursos.component.css']
 })
-export class VerCursosComponent implements OnInit, OnDestroy {
+export class VerCursosComponent implements OnInit, OnDestroy , AfterViewInit {
 
   id!: number;
 
@@ -18,6 +22,12 @@ export class VerCursosComponent implements OnInit, OnDestroy {
   loading:boolean = false;
 
   routeSub!: Subscription;
+
+  displayedColumns: string[] = ['name','description'];
+  dataSource = new MatTableDataSource<Material>();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   /* curso$!: Observable<Curso> PIPE ASYNC*/
 
@@ -37,11 +47,26 @@ export class VerCursosComponent implements OnInit, OnDestroy {
       this.obtenerCurso(); 
     }) */
     this.obtenerCurso();
+    this.obtenerMateriales();
+ 
   }
 
   ngOnDestroy(): void {
       /* this.routeSub.unsubscribe(); */
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    /*if(this.dataSource.data.length > 0){
+      this.paginator._intl.itemsPerPageLabel = 'Items por pagina';
+    } */
+      this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }  
 
    obtenerCurso(){
     this.loading = true;
@@ -51,4 +76,13 @@ export class VerCursosComponent implements OnInit, OnDestroy {
         this.loading = false;
       })
   } 
+
+  obtenerMateriales(){
+    this._cursosService.getMateriales(this.id).subscribe(data =>{
+      //console.log(data);
+      this.dataSource.data = data;
+    })    
+  }
+
+  
 }
