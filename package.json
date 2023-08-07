@@ -1,5 +1,6 @@
 {
   "name": "web-app-control-cursos-frontend-angular",
+  "homepage": "https://alphamen01.github.io/WebAppControlCursosFrontendAngular/Cursos",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
