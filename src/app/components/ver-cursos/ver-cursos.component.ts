@@ -56,11 +56,12 @@ export class VerCursosComponent implements OnInit, OnDestroy , AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    //this.dataSource.paginator = this.paginator;
     /*if(this.dataSource.data.length > 0){
       this.paginator._intl.itemsPerPageLabel = 'Items por pagina';
     } */
-      this.dataSource.sort = this.sort;
+      //this.dataSource.sort = this.sort;
+      this.obtenerMateriales();
   }
 
   applyFilter(event: Event) {
@@ -81,6 +82,8 @@ export class VerCursosComponent implements OnInit, OnDestroy , AfterViewInit {
     this._cursosService.getMateriales(this.id).subscribe(data =>{
       //console.log(data);
       this.dataSource.data = data;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })    
   }
 
